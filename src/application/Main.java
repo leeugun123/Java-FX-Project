@@ -59,7 +59,8 @@ public class Main extends Application{
 			
 			grid.addRow(0,cp,slider);
 			grid.setHgap(20);
-			grid.setAlignment(Pos.TOP_CENTER);
+			
+			grid.setAlignment(Pos.TOP_LEFT);
 			grid.setPadding(new Insets(20,0,0,0));
 			
 			scene.setOnMousePressed(e->{
@@ -89,7 +90,7 @@ public class Main extends Application{
 			
 	}
 	
-	Canvas canvas = new Canvas(800,500);
+	Canvas canvas = new Canvas(1500,800);
 	//도화지 크기 설정
 	
 	GridPane grid = new GridPane();
@@ -101,7 +102,7 @@ public class Main extends Application{
 	Slider slider = new Slider();
 	
 	StackPane pane = new StackPane();
-	Scene scene = new Scene(pane,800,500);
+	Scene scene = new Scene(pane,1500,800);
 	
 	
 	public static void main(String[] args) {
