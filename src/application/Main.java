@@ -10,6 +10,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -20,6 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 
@@ -36,6 +38,12 @@ public class Main extends Application{
 			//선의 색깔을 정해줌			
 			gc.setLineWidth(1);
 			
+			color.setTextFill(Color.BLACK);
+			color.setFont(Font.font("Arial", FontWeight.BOLD, 20));			
+			thickness.setTextFill(Color.BLACK);
+			thickness.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+			//라벨 선, 굵기 설정
+			
 			pane.getChildren().addAll(canvas,grid);
 			cp.setValue(Color.BLACK);//처음 색깔을 검은색으로
 			cp.setOnAction(e->{
@@ -43,7 +51,8 @@ public class Main extends Application{
 				gc.setStroke(cp.getValue());
 				
 			});//선택된 색깔이 나오게됨
-		
+			
+			
 			slider.setMin(1);
 			slider.setMax(50);
 			slider.setShowTickLabels(true);
@@ -57,8 +66,9 @@ public class Main extends Application{
 			
 			pane.setStyle("-fx-background-color: white");
 			
-			grid.addRow(0,cp,slider);
-			grid.setHgap(20);
+			grid.addRow(0,color,cp,thickness,slider,erase);
+			
+			grid.setHgap(10);
 			
 			grid.setAlignment(Pos.TOP_LEFT);
 			grid.setPadding(new Insets(20,0,0,0));
@@ -78,6 +88,11 @@ public class Main extends Application{
 				
 			});//이동한 지점마다 계속 점을 찍어준다.
 			
+			erase.setOnMouseClicked(e->{
+				
+				gc.setStroke(Color.WHITE);
+			});
+		
 		
 			
 			Stage.setScene(scene);
@@ -90,22 +105,33 @@ public class Main extends Application{
 			
 	}
 	
-	Canvas canvas = new Canvas(1500,800);
+	Canvas canvas = new Canvas(1500,700);
 	//도화지 크기 설정
 	
 	GridPane grid = new GridPane();
 	
-
 	GraphicsContext gc;
 	
-	ColorPicker cp = new ColorPicker();
+	ColorPicker cp = new ColorPicker();//선의 색깔
+	
 	Slider slider = new Slider();
 	
+	//Pane basePane = new Pane();
+	
 	StackPane pane = new StackPane();
+	
 	Scene scene = new Scene(pane,1500,800);
+	
+	Button erase = new Button("지우개");
+	
+	Label color = new Label("색깔");
+	Label thickness = new Label("굵기");
 	
 	
 	public static void main(String[] args) {
 		launch(args);
 	}
+	
+	
+	
 }
