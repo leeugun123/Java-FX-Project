@@ -42,15 +42,26 @@ public class Main extends Application{
 			color.setFont(Font.font("Arial", FontWeight.BOLD, 20));			
 			thickness.setTextFill(Color.BLACK);
 			thickness.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+			background.setTextFill(Color.BLACK);
+			background.setFont(Font.font("Arial", FontWeight.BOLD, 20));
 			//라벨 선, 굵기 설정
 			
 			pane.getChildren().addAll(canvas,grid);
 			cp.setValue(Color.BLACK);//처음 색깔을 검은색으로
 			cp.setOnAction(e->{
 				
+				Return();
 				gc.setStroke(cp.getValue());
 				
 			});//선택된 색깔이 나오게됨
+			
+			
+			bg.setOnAction(e->{
+				
+				gc.setStroke(bg.getValue());
+				gc.setLineWidth(3000);
+				
+			});
 			
 			
 			slider.setMin(1);
@@ -66,7 +77,7 @@ public class Main extends Application{
 			
 			pane.setStyle("-fx-background-color: white");
 			
-			grid.addRow(0,color,cp,thickness,slider,erase);
+			grid.addRow(0,color,cp,thickness,slider,erase,background,bg);
 			
 			grid.setHgap(10);
 			
@@ -90,6 +101,7 @@ public class Main extends Application{
 			
 			erase.setOnMouseClicked(e->{
 				
+				Return();
 				gc.setStroke(Color.WHITE);
 			});
 		
@@ -105,6 +117,12 @@ public class Main extends Application{
 			
 	}
 	
+	public void Return() {
+		
+		double value = slider.getValue();
+		gc.setLineWidth(value);
+	}
+	
 	Canvas canvas = new Canvas(1500,700);
 	//도화지 크기 설정
 	
@@ -113,6 +131,8 @@ public class Main extends Application{
 	GraphicsContext gc;
 	
 	ColorPicker cp = new ColorPicker();//선의 색깔
+	ColorPicker bg = new ColorPicker();
+	
 	
 	Slider slider = new Slider();
 	
@@ -123,10 +143,10 @@ public class Main extends Application{
 	Scene scene = new Scene(pane,1500,800);
 	
 	Button erase = new Button("지우개");
-	
+
 	Label color = new Label("색깔");
 	Label thickness = new Label("굵기");
-	
+	Label background = new Label("배경색");
 	
 	public static void main(String[] args) {
 		launch(args);
