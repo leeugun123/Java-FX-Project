@@ -47,7 +47,7 @@ public class Main extends Application{
 			slider.setMin(1);
 			slider.setMax(50);
 			slider.setShowTickLabels(true);
-			slider.setShowTickLabels(true);
+			slider.setShowTickMarks(true);
 			slider.valueProperty().addListener(e->{
 				
 				double value = slider.getValue();
